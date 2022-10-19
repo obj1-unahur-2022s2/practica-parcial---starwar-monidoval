@@ -1,0 +1,83 @@
+import personas.*
+import planetas.*
+
+
+describe "tests sobre el escenario básico"{
+	
+	const Julieta = new Persona(edad = 42)
+	const Ana = new Atleta(edad = 25)
+	const Rosa = new Atleta (edad = 45, cantidadDeTecnicas = 8)
+	const Perla = new Atleta (edad = 28, cantidadDeTecnicas= 4, masaMuscular = 6)
+	const Monica = new Docente (edad=  45, cantidadDeCursosDados = 6)
+	const Luisa = new Docente (edad = 35, cantidadDeCursosDados = 1)
+	const Triton = new Planeta (habitantes= #{Julieta, Ana, Rosa, Perla, Monica, Luisa}, cantidadDeMuseos = 3)
+	
+	test "test para Julieta" {
+
+	assert.equals(20, Julieta.potencia())
+	assert.equals(8, Julieta.inteligencia())
+	assert.notThat(Julieta.esDestacada())
+
+}
+	test "test para Ana" {
+
+	assert.equals(28, Ana.potencia())
+	assert.equals(12, Ana.inteligencia())
+	assert.that(Ana.esDestacada())
+	
+}
+	test "test para Rosa" {
+
+	assert.equals(52, Rosa.potencia())
+	assert.equals(8, Rosa.inteligencia())
+	assert.that(Rosa.esDestacada())	
+}	
+	test "test para Perla" {
+
+	assert.equals(44, Perla.potencia())
+	assert.equals(12, Perla.inteligencia())
+	assert.notThat(Perla.esDestacada())		
+	}
+	test "test para Monica" {
+
+	assert.equals(20, Monica.potencia())
+	assert.equals(20, Monica.inteligencia())
+	assert.that(Monica.esDestacada())	
+	}
+	test "test para Luisa" {
+
+	assert.equals(20, Luisa.potencia())
+	assert.equals(14, Luisa.inteligencia())
+	assert.notThat(Luisa.esDestacada())
+	
+	}
+	
+	test "test planeta Triton, delegacion diplomática Ana, Rosa, Monica, defensa inicial 2, 
+          no es un planeta culto, potencia real 184"{
+          	
+          	assert.equals(#{Ana, Rosa, Monica}, Triton.delegacionDiplomatica())
+          	assert.equals(2, Triton.valorInicialDeDefensa())
+          	assert.notThat(Triton.esCulto())
+          	assert.equals(184, Triton.potenciaReal())     	
+          }
+    test "test unicos para Perla, después de entrenar 15 días y aprender una técnica, aún no es destacada
+           al aprender una técnica más es destacada"{             	
+       	
+    		Perla.entrenar(15)
+    		Perla.aprenderUnaTecnica()
+    		
+    		assert.equals(65, Perla.potencia())			
+			assert.notThat(Perla.esDestacada())	
+			
+			
+			Perla.aprenderUnaTecnica()
+			
+			assert.that(Perla.esDestacada())
+    		
+    	}
+    	  
+          
+          
+          
+}
+
